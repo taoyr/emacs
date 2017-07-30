@@ -160,13 +160,12 @@
 
 (require 'xcscope)
 (evil-leader/set-key
-  "a" 'cscope-rerun-search-at-point
+  "b" 'helm-buffers-list
+  "f" 'helm-locate
   "s" 'cscope-find-this-symbol
-  "g" 'cscope-find-global-definition-no-prompting
   "c" 'cscope-find-functions-calling-this-function
   "t" 'cscope-find-this-text-string
-  "w" 'save-buffer
-  "q" 'sanityinc/toggle-delete-other-windows)
+  "w" 'save-buffer)
 
 (require 'git-gutter)
 
@@ -201,6 +200,23 @@
 (set-face-background 'region "blue")
 (set-face-foreground 'secondary-selection "skyblue")
 (set-face-background 'secondary-selection "darkblue")
+
+;; (defun moon-next-line ()
+;;   (interactive)
+;;   (evil-next-line)
+;;   (recenter))
+;; (define-key evil-normal-state-map (kbd "j") 'moon-next-line)
+
+;; (defun moon-prev-line ()
+;;   (interactive)
+;;   (evil-previous-line)
+;;   (recenter))
+;; (define-key evil-normal-state-map (kbd "k") 'moon-prev-line)
+
+(define-key evil-normal-state-map (kbd "C-n") 'cscope-history-forward-line)
+(define-key evil-normal-state-map (kbd "C-p") 'cscope-history-backward-line)
+(define-key evil-normal-state-map (kbd "RET") 'cscope-select-entry-other-window)
+(define-key evil-normal-state-map (kbd "C-]") 'cscope-find-global-definition-no-prompting)
 ;;-------------------my config-------------------------------------------------
 
 ;; Local Variables:
