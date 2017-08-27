@@ -83,7 +83,7 @@ attention to case differences."
   :group 'matching)
 
 (defface company-tooltip
-  '((default :foreground "black")
+  '((default :foreground "yellow")
     (((class color) (min-colors 88) (background light))
      (:background "cornsilk"))
     (((class color) (min-colors 88) (background dark))

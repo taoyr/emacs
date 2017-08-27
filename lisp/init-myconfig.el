@@ -47,17 +47,24 @@
 (define-key global-map (kbd "C-k") 'kill-buffer-and-window)
 (define-key global-map (kbd "C-l") 'switch-window)
 
-(set-face-foreground 'highlight "white")
-(set-face-background 'highlight "blue")
-(set-face-foreground 'region "cyan")
-(set-face-background 'region "blue")
-(set-face-foreground 'secondary-selection "skyblue")
-(set-face-background 'secondary-selection "darkblue")
+(add-hook 'after-init-hook 'global-hl-line-mode)
+(require 'molokai-theme)
+
+;; (set-face-foreground 'highlight "FFFFFF")
+;; (set-face-background 'highlight "000000")
+;; (set-face-foreground 'region "red")
+(set-face-background 'region "red")
+;; (set-face-foreground 'secondary-selection "red")
+;; (set-face-background 'secondary-selection "gray10")
 
 (define-key evil-normal-state-map (kbd "C-n") 'cscope-history-forward-line)
 (define-key evil-normal-state-map (kbd "C-p") 'cscope-history-backward-line)
 (define-key evil-normal-state-map (kbd "RET") 'cscope-select-entry-other-window)
 (define-key evil-normal-state-map (kbd "C-]") 'cscope-find-global-definition-no-prompting)
+(define-key evil-normal-state-map (kbd "L") 'evil-end-of-line)
+(define-key evil-normal-state-map (kbd "H") 'evil-beginning-of-line)
+(define-key evil-visual-state-map (kbd "L") 'evil-end-of-visual-line)
+
 ;;-------------------my config-------------------------------------------------
 
 (provide 'init-myconfig)

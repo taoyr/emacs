@@ -31,7 +31,7 @@
 (custom-theme-set-faces
  'molokai
 
- '(default ((t (:background "#1B1D1E" :foreground "#F8F8F2"))))
+ '(default ((t (:background "#383838" :foreground "#FFFFFF"))))
  '(cursor ((t (:background "#F8F8F0"))))
 
  '(bold ((t (:weight bold))))
