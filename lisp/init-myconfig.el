@@ -14,9 +14,13 @@
 (require 'xcscope)
 (evil-leader/set-key
   "b" 'helm-buffers-list
-  "f" 'helm-locate
-  "s" 'cscope-find-this-symbol
   "c" 'cscope-find-functions-calling-this-function
+  "d" 'cscope-find-global-definition
+  "l" 'helm-locate
+  "m" 'helm-imenu
+  "o" 'helm-occur
+  "p" 'find-file-in-project
+  "s" 'cscope-find-this-symbol
   "t" 'cscope-find-this-text-string
   "w" 'save-buffer)
 
@@ -43,19 +47,22 @@
 (setq c-default-style "Linux")
 (setq default-tab-width 4)
 
-(define-key global-map (kbd "C-j") 'sanityinc/toggle-delete-other-windows)
-(define-key global-map (kbd "C-k") 'kill-buffer-and-window)
-(define-key global-map (kbd "C-l") 'switch-window)
+(define-key global-map (kbd "C-j") 'save-buffer)
+(define-key global-map (kbd "<f3>") 'switch-window)
+(define-key global-map (kbd "<f4>") 'delete-other-windows)
+(define-key global-map (kbd "<f5>") 'delete-window)
+(define-key global-map (kbd "<f8>") 'helm-do-grep-ag)
 
 (add-hook 'after-init-hook 'global-hl-line-mode)
-(require 'molokai-theme)
+
+;; (require 'molokai-theme)
 
 ;; (set-face-foreground 'highlight "FFFFFF")
-;; (set-face-background 'highlight "000000")
+;; (set-face-background 'highlight "cyan")
 ;; (set-face-foreground 'region "red")
-(set-face-background 'region "red")
+;; (set-face-background 'region "cyan")
 ;; (set-face-foreground 'secondary-selection "red")
-;; (set-face-background 'secondary-selection "gray10")
+;; (set-face-background 'secondary-selection "cyan")
 
 (define-key evil-normal-state-map (kbd "C-n") 'cscope-history-forward-line)
 (define-key evil-normal-state-map (kbd "C-p") 'cscope-history-backward-line)
@@ -64,6 +71,20 @@
 (define-key evil-normal-state-map (kbd "L") 'evil-end-of-line)
 (define-key evil-normal-state-map (kbd "H") 'evil-beginning-of-line)
 (define-key evil-visual-state-map (kbd "L") 'evil-end-of-visual-line)
+
+(add-hook 'java-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
+(add-hook 'c-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
+
+(require 'powerline)
+(powerline-center-evil-theme)
+
+
+;; (load-theme 'monokai t)
+
+;;Exit insert mode by pressing j and then j quickly
+(setq key-chord-two-keys-delay 0.5)
+(key-chord-define evil-insert-state-map "jj" 'evil-normal-state)
+(key-chord-mode 1)
 
 ;;-------------------my config-------------------------------------------------
 

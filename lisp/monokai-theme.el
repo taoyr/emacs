@@ -81,5 +81,6 @@ Based on the TextMate theme Monokai"
      (font-latex-slide-title-face ((t (:foreground "#c4a000")))) ; dark butter
      )))
 
-(provide 'color-theme-monokai)
+;; (provide 'color-theme-monokai)
+(provide-theme 'monokai)
 

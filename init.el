@@ -81,6 +81,7 @@
 (require 'init-sql)
 (require 'init-paredit)
 (require 'init-lisp)
+(require 'init-clipboard)
 (require 'init-slime)
 (unless (version<= emacs-version "24.2")
   (require 'init-clojure)

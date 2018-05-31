@@ -261,34 +261,34 @@ Paredit behaves badly if parentheses are unbalanced, so exercise
 ;;; strings, in which case they are headings for the next entries.
 
 (progn (setq paredit-commands
- `(
-   "Basic Insertion Commands"
-   ("("         paredit-open-round
+             `(
+               "Basic Insertion Commands"
+               ("("         paredit-open-round
                 ("(a b |c d)"
                  "(a b (|) c d)")
                 ("(foo \"bar |baz\" quux)"
                  "(foo \"bar (|baz\" quux)"))
-   (")"         paredit-close-round
+               (")"         paredit-close-round
                 ("(a b |c   )" "(a b c)|")
                 ("; Hello,| world!"
                  "; Hello,)| world!"))
-   ("M-)"       paredit-close-round-and-newline
+               ("M-)"       paredit-close-round-and-newline
                 ("(defun f (x|  ))"
                  "(defun f (x)\n  |)")
                 ("; (Foo.|"
                  "; (Foo.)|"))
-   ("["         paredit-open-square
+               ("["         paredit-open-square
                 ("(a b |c d)"
                  "(a b [|] c d)")
                 ("(foo \"bar |baz\" quux)"
                  "(foo \"bar [|baz\" quux)"))
-   ("]"         paredit-close-square
+               ("]"         paredit-close-square
                 ("(define-key keymap [frob|  ] 'frobnicate)"
                  "(define-key keymap [frob]| 'frobnicate)")
                 ("; [Bar.|"
                  "; [Bar.]|"))
-
-   ("\""        paredit-doublequote
+               
+               ("\""        paredit-doublequote
                 ("(frob grovel |full lexical)"
                  "(frob grovel \"|\" full lexical)"
                  "(frob grovel \"\"| full lexical)")
@@ -296,18 +296,18 @@ Paredit behaves badly if parentheses are unbalanced, so exercise
                  "(foo \"bar \\\"|baz\" quux)")
                 ("(frob grovel)   ; full |lexical"
                  "(frob grovel)   ; full \"|lexical"))
-   ("M-\""      paredit-meta-doublequote
+               ("M-\""      paredit-meta-doublequote
                 ("(foo \"bar |baz\" quux)"
                  "(foo \"bar baz\"| quux)")
                 ("(foo |(bar #\\x \"baz \\\\ quux\") zot)"
                  ,(concat "(foo \"|(bar #\\\\x \\\"baz \\\\"
                           "\\\\ quux\\\")\" zot)")))
-   ("\\"        paredit-backslash
+               ("\\"        paredit-backslash
                 ("(string #|)\n  ; Character to escape: x"
                  "(string #\\x|)")
                 ("\"foo|bar\"\n  ; Character to escape: \""
                  "\"foo\\\"|bar\""))
-   (";"         paredit-semicolon
+               (";"         paredit-semicolon
                 ("|(frob grovel)"
                  ";|(frob grovel)")
                 ("(frob |grovel)"
@@ -316,7 +316,7 @@ Paredit behaves badly if parentheses are unbalanced, so exercise
                  "(frob ;|grovel\n (bloit\n  zargh))")
                 ("(frob grovel)          |"
                  "(frob grovel)          ;|"))
-   ("M-;"       paredit-comment-dwim
+               ("M-;"       paredit-comment-dwim
                 ("(foo |bar)   ; baz"
                  "(foo bar)                               ; |baz")
                 ("(frob grovel)|"
@@ -327,15 +327,15 @@ Paredit behaves badly if parentheses are unbalanced, so exercise
                  "(zot (foo bar)\n     ;; |\n     (baz quux))")
                 ("|(defun hello-world ...)"
                  ";;; |\n(defun hello-world ...)"))
-
-   ("C-j"       paredit-newline
-                ("(let ((n (frobbotz))) |(display (+ n 1)\nport))"
-                 ,(concat "(let ((n (frobbotz)))"
-                          "\n  |(display (+ n 1)"
-                          "\n           port))")))
+               
+               ;; ("C-j"       paredit-newline
+               ;;              ("(let ((n (frobbotz))) |(display (+ n 1)\nport))"
+               ;;               ,(concat "(let ((n (frobbotz)))"
+               ;;                        "\n  |(display (+ n 1)"
+               ;;                        "\n           port))")))
 
-   "Deleting & Killing"
-   (("C-d" ,@paredit-forward-delete-keys)
+               "Deleting & Killing"
+               (("C-d" ,@paredit-forward-delete-keys)
                 paredit-forward-delete
                 ("(quu|x \"zot\")" "(quu| \"zot\")")
                 ("(quux |\"zot\")"
@@ -343,7 +343,7 @@ Paredit behaves badly if parentheses are unbalanced, so exercise
                  "(quux \"|ot\")")
                 ("(foo (|) bar)" "(foo | bar)")
                 ("|(foo bar)" "(|foo bar)"))
-   (,paredit-backward-delete-key
+               (,paredit-backward-delete-key
                 paredit-backward-delete
                 ("(\"zot\" q|uux)" "(\"zot\" |uux)")
                 ("(\"zot\"| quux)"
@@ -351,7 +351,7 @@ Paredit behaves badly if parentheses are unbalanced, so exercise
                  "(\"zo|\" quux)")
                 ("(foo (|) bar)" "(foo | bar)")
                 ("(foo bar)|" "(foo bar|)"))
-   ("C-k"       paredit-kill
+               ("C-k"       paredit-kill
                 ("(foo bar)|     ; Useless comment!"
                  "(foo bar)|")
                 ("(|foo bar)     ; Useful comment!"
@@ -360,7 +360,7 @@ Paredit behaves badly if parentheses are unbalanced, so exercise
                  "|")
                 ("(foo \"|bar baz\"\n     quux)"
                  "(foo \"|\"\n     quux)"))
-   ("M-d"       paredit-forward-kill-word
+               ("M-d"       paredit-forward-kill-word
                 ("|(foo bar)    ; baz"
                  "(| bar)    ; baz"
                  "(|)    ; baz"
@@ -368,7 +368,7 @@ Paredit behaves badly if parentheses are unbalanced, so exercise
                 (";;;| Frobnicate\n(defun frobnicate ...)"
                  ";;;|\n(defun frobnicate ...)"
                  ";;;\n(| frobnicate ...)"))
-   (,(concat "M-" paredit-backward-delete-key)
+               (,(concat "M-" paredit-backward-delete-key)
                 paredit-backward-kill-word
                 ("(foo bar)    ; baz\n(quux)|"
                  "(foo bar)    ; baz\n(|)"
@@ -376,84 +376,84 @@ Paredit behaves badly if parentheses are unbalanced, so exercise
                  "(foo |)    ; \n()"
                  "(|)    ; \n()"))
 
-   "Movement & Navigation"
-   ("C-M-f"     paredit-forward
+               "Movement & Navigation"
+               ("C-M-f"     paredit-forward
                 ("(foo |(bar baz) quux)"
                  "(foo (bar baz)| quux)")
                 ("(foo (bar)|)"
                  "(foo (bar))|"))
-   ("C-M-b"     paredit-backward
+               ("C-M-b"     paredit-backward
                 ("(foo (bar baz)| quux)"
                  "(foo |(bar baz) quux)")
                 ("(|(foo) bar)"
                  "|((foo) bar)"))
-   ("C-M-u"     paredit-backward-up)
-   ("C-M-d"     paredit-forward-down)
-   ("C-M-p"     paredit-backward-down)  ; Built-in, these are FORWARD-
-   ("C-M-n"     paredit-forward-up)     ; & BACKWARD-LIST, which have
+               ("C-M-u"     paredit-backward-up)
+               ("C-M-d"     paredit-forward-down)
+               ("C-M-p"     paredit-backward-down)  ; Built-in, these are FORWARD-
+               ("C-M-n"     paredit-forward-up)     ; & BACKWARD-LIST, which have
                                         ; no need given C-M-f & C-M-b.
-
-   "Depth-Changing Commands"
-   ("M-("       paredit-wrap-round
+               
+               "Depth-Changing Commands"
+               ("M-("       paredit-wrap-round
                 ("(foo |bar baz)"
                  "(foo (|bar) baz)"))
-   ("M-s"       paredit-splice-sexp
+               ("M-s"       paredit-splice-sexp
                 ("(foo (bar| baz) quux)"
                  "(foo bar| baz quux)"))
-   (("M-<up>" "ESC <up>")
+               (("M-<up>" "ESC <up>")
                 paredit-splice-sexp-killing-backward
                 ("(foo (let ((x 5)) |(sqrt n)) bar)"
                  "(foo |(sqrt n) bar)"))
-   (("M-<down>" "ESC <down>")
+               (("M-<down>" "ESC <down>")
                 paredit-splice-sexp-killing-forward
                 ("(a (b c| d e) f)"
                  "(a b c| f)"))
-   ("M-r"       paredit-raise-sexp
+               ("M-r"       paredit-raise-sexp
                 ("(dynamic-wind in (lambda () |body) out)"
                  "(dynamic-wind in |body out)"
                  "|body"))
-   ("M-?"       paredit-convolute-sexp
+               ("M-?"       paredit-convolute-sexp
                 ("(let ((x 5) (y 3)) (frob |(zwonk)) (wibblethwop))"
                  "(frob |(let ((x 5) (y 3)) (zwonk) (wibblethwop)))"))
 
-   "Barfage & Slurpage"
-   (("C-)" "C-<right>")
+               "Barfage & Slurpage"
+               (("C-)" "C-<right>")
                 paredit-forward-slurp-sexp
                 ("(foo (bar |baz) quux zot)"
                  "(foo (bar |baz quux) zot)")
                 ("(a b ((c| d)) e f)"
                  "(a b ((c| d) e) f)"))
-   (("C-}" "C-<left>")
+               (("C-}" "C-<left>")
                 paredit-forward-barf-sexp
                 ("(foo (bar |baz quux) zot)"
                  "(foo (bar |baz) quux zot)"))
-   (("C-(" "C-M-<left>" "ESC C-<left>")
+               (("C-(" "C-M-<left>" "ESC C-<left>")
                 paredit-backward-slurp-sexp
                 ("(foo bar (baz| quux) zot)"
                  "(foo (bar baz| quux) zot)")
                 ("(a b ((c| d)) e f)"
                  "(a (b (c| d)) e f)"))
-   (("C-{" "C-M-<right>" "ESC C-<right>")
+               (("C-{" "C-M-<right>" "ESC C-<right>")
                 paredit-backward-barf-sexp
                 ("(foo (bar baz |quux) zot)"
                  "(foo bar (baz |quux) zot)"))
 
-   "Miscellaneous Commands"
-   ("M-S"       paredit-split-sexp
+               "Miscellaneous Commands"
+               ("M-S"       paredit-split-sexp
                 ("(hello| world)"
                  "(hello)| (world)")
                 ("\"Hello, |world!\""
                  "\"Hello, \"| \"world!\""))
-   ("M-J"       paredit-join-sexps
+               ("M-J"       paredit-join-sexps
                 ("(hello)| (world)"
                  "(hello| world)")
                 ("\"Hello, \"| \"world!\""
                  "\"Hello, |world!\"")
                 ("hello-\n|  world"
                  "hello-|world"))
-   ("C-c C-M-l" paredit-recenter-on-sexp)
-   ("M-q"       paredit-reindent-defun)
-   ))
+               ("C-c C-M-l" paredit-recenter-on-sexp)
+               ("M-q"       paredit-reindent-defun)
+               ))
        nil)                             ; end of PROGN
 
 ;;;;; Command Examples
